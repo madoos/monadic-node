@@ -1,0 +1,75 @@
+{
+  "name": "monadic-node",
+  "private": false,
+  "version": "0.0.0",
+  "description": "Native Nodejs modules and utilities using Algebraic Data Types (ADT)",
+  "repository": "https://github.com/madoos/monadic-node",
+  "homepage": "https://github.com/madoos/monadic-node",
+  "license": "MIT",
+  "engines": {
+    "npm": ">= 4.0.0"
+  },
+  "author": {
+    "name": "Maurice",
+    "email": "maurice.ronet.dominguez@gmail.com",
+    "url": "https://github.com/madoos"
+  },
+  "scripts": {
+    "pretest": "eslint .",
+    "test": "jest",
+    "tdd": "npm run test -- --watch"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-config-xo": "^0.29.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "husky": "^4.2.3",
+    "jest": "^25.1.0",
+    "lerna": "^3.20.2",
+    "lint-staged": "^10.0.7",
+    "prettier": "^1.19.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.json": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "xo",
+      "prettier"
+    ],
+    "env": {
+      "jest": true,
+      "node": true
+    },
+    "rules": {
+      "prettier/prettier": "error"
+    },
+    "plugins": [
+      "prettier"
+    ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "jest": {
+    "testEnvironment": "node"
+  }
+}
