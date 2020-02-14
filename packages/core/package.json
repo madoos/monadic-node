@@ -1,0 +1,27 @@
+{
+  "name": "@monadic-node/core",
+  "version": "0.0.1",
+  "description": "Core library to convert native Nodejs modules to Algebraic Data Types.",
+  "main": "index.js",
+  "repository": "https://github.com/madoos/monadic-node/tree/master/packages/core",
+  "homepage": "https://github.com/madoos/monadic-node",
+  "license": "MIT",
+  "author": {
+    "name": "Maurice",
+    "email": "maurice.ronet.dominguez@gmail.com",
+    "url": "https://github.com/madoos"
+  },
+  "keywords": [
+    "functional",
+    "core",
+    "monad",
+    "functor",
+    "ap",
+    "applicative",
+    "monadic-node"
+  ],
+  "dependencies": {
+    "crocks": "^0.12.4",
+    "ramda": "^0.27.0"
+  }
+}
