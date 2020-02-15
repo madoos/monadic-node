@@ -16,8 +16,9 @@
   },
   "scripts": {
     "pretest": "eslint .",
-    "test": "jest",
-    "tdd": "npm run test -- --watch"
+    "test": "jest --coverage",
+    "tdd": "npm run test -- --watch",
+    "serve:coverage": "live-server coverage/lcov-report"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
@@ -30,6 +31,7 @@
     "jest": "^25.1.0",
     "lerna": "^3.20.2",
     "lint-staged": "^10.0.7",
+    "live-server": "^1.2.1",
     "prettier": "^1.19.1"
   },
   "husky": {
