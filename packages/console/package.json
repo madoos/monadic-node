@@ -1,0 +1,25 @@
+{
+  "name": "@monadic-node/console",
+  "version": "0.0.1",
+  "description": "Console nodeJS module using IO ADT",
+  "main": "index.js",
+  "repository": "https://github.com/madoos/monadic-node/tree/master/packages/console",
+  "homepage": "https://github.com/madoos/monadic-node",
+  "license": "MIT",
+  "author": {
+    "name": "Maurice",
+    "email": "maurice.ronet.dominguez@gmail.com",
+    "url": "https://github.com/madoos"
+  },
+  "keywords": [
+    "functional",
+    "console",
+    "monad",
+    "functor",
+    "ap",
+    "applicative"
+  ],
+  "dependencies": {
+    "@monadic-node/core": "^0.0.1"
+  }
+}
