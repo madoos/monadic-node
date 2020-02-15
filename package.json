@@ -58,7 +58,9 @@
       "node": true
     },
     "rules": {
-      "prettier/prettier": "error"
+      "prettier/prettier": 2,
+      "capitalized-comments": 0,
+      "new-cap": 0
     },
     "plugins": [
       "prettier"
