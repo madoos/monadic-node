@@ -75,3 +75,8 @@ Convert the function provided into a function with the same arguments but return
 ```bash
 toIO :: (* -> a) -> (* -> IO a)
 ```
+
+### Stream
+
+See Stream API doc core/Stream/README.md
+
