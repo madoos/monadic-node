@@ -4,6 +4,8 @@ const T = require("./transform");
 const { isFunction } = require("crocks");
 const { identity } = require("ramda");
 
+const _TYPE = "@@/stream/type";
+
 const Stream = tagged("Stream", ["getNodeStream"]);
 
 Stream.prototype.map = function(f) {
@@ -18,6 +20,10 @@ Stream.prototype[FL.map] = Stream.prototype.map;
 Stream.of = value => Stream(() => T.createReadableOf(value));
 
 Stream[FL.of] = Stream.of;
+
+Stream.is = x => x[_TYPE] === Stream;
+
+Stream.prototype[_TYPE] = Stream;
 
 Stream.prototype.consume = function(
   next = identity,

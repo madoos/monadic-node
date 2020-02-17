@@ -150,4 +150,12 @@ describe("Stream", () => {
       return collect(one).then(([result]) => expect(result).toEqual(1));
     });
   });
+
+  describe("static .is", () => {
+    test("Should return true if target is instance of Stream", () => {
+      const one = Stream.of(1);
+      expect(Stream.is(one)).toBe(true);
+      expect(Stream.is(1)).toBe(false);
+    });
+  });
 });

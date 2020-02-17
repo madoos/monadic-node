@@ -56,7 +56,11 @@ packageNameIO.run(); // show in console "@monadic-node/core"
 
 ## API
 
-### doWith:
+### Stream
+
+See Stream API doc core/Stream/README.md
+
+### doWith
 
 
 Transform all methods of an object using the function provided. If any value of the object is not a function, no transformation is applied and the value is the same.
@@ -68,7 +72,7 @@ doWith :: Monad m => (
   ) -> { String: (* -> m a)}`
 ```
 
-### toIO:
+### toIO
 
 Convert the function provided into a function with the same arguments but returns an IO.
 
@@ -76,7 +80,51 @@ Convert the function provided into a function with the same arguments but return
 toIO :: (* -> a) -> (* -> IO a)
 ```
 
-### Stream
+## isInstanceOfIO
 
-See Stream API doc core/Stream/README.md
+```bash
+isInstanceOfIO :: a -> Boolean
+```
+### toAsync
 
+Convert the callback function provided into a function with the same arguments but returns an Async.
+
+```bash
+toAsync :: (* -> ()) -> (* -> IO a)
+```
+
+```js
+const { readFile } = require('fs');
+const readFileAsync = toAsync(readFile)
+
+readFileAsync(file).fork(console.error, console.log)
+```
+
+## isInstanceOfAsync
+
+```bash
+isInstanceOfAsync :: a -> Boolean
+```
+### toStream:
+
+Convert the function provided into a function with the same arguments but returns an Stream.
+
+```bash
+toStream :: (* -> NodeJSStream a) -> (* -> Stream a)
+```
+
+```js
+const { createReadStream } = require('fs');
+const read = toStream(createReadStream)
+
+read(file).consume(
+  console.log, 
+  console.error,
+  () => console.log('Completed!')
+)
+```
+## isInstanceOfStream
+
+```bash
+isInstanceOfStream :: a -> Boolean
+```

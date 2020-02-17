@@ -22,6 +22,12 @@
   ],
   "dependencies": {
     "crocks": "^0.12.4",
-    "ramda": "^0.27.0"
+    "daggy": "^1.4.0",
+    "fantasy-land": "^4.0.1",
+    "ramda": "^0.27.0",
+    "readable-stream": "^3.6.0"
+  },
+  "devDependencies": {
+    "minify-stream": "^1.2.1"
   }
 }

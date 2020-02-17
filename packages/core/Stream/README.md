@@ -132,3 +132,14 @@ script.consume(
   console.log("Completed!")
 );
 ```
+
+## .is
+
+```bash
+is :: a -> Boolean 
+```
+
+```js
+Stream.is(1) // false
+Stream.is(createReadStream(file)) // true
+```
