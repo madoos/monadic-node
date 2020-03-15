@@ -1,8 +1,8 @@
 const Stream = require("../");
 const { createReadStream, createWriteStream } = require("fs");
-const { pipe, map } = require("./node_modules/ramda");
+const { pipe, map } = require("ramda");
 const { join } = require("path");
-const minify = require("./node_modules/minify-stream");
+const minify = require("minify-stream");
 
 // minifyScript :: String -> Stream Buffer
 const minifyScript = pipe(

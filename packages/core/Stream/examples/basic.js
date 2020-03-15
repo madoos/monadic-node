@@ -1,6 +1,6 @@
 const Stream = require("../");
 const { createReadStream } = require("fs");
-const { pipe, map, prop, toString } = require("./node_modules/ramda");
+const { pipe, map, prop, toString } = require("ramda");
 
 // readPackageName :: String -> Stream String
 const readPackageName = pipe(

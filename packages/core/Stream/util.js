@@ -1,3 +1,6 @@
+const { apply } = require("ramda");
+const equals = require("deep-equal");
+
 // collect :: (Stream a| Monstream a) -> Promise e [a]
 const collect = stream => {
   const results = [];
@@ -13,6 +16,10 @@ const collect = stream => {
   });
 };
 
+const isEquivalent = (x, y) =>
+  Promise.all([collect(x), collect(y)]).then(apply(equals));
+
 module.exports = {
-  collect
+  collect,
+  isEquivalent
 };

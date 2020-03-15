@@ -18,7 +18,10 @@ const Stream = require('@monadic-node/core/Stream')
 
 ## Fantasy Land Implements
 
+* Monoid
 * Functor
+* Applicative
+* Monad
 
 ## Example
 
