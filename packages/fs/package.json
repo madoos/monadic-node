@@ -1,0 +1,26 @@
+{
+  "name": "@monadic-node/fs",
+  "version": "0.0.1",
+  "description": "fs nodeJS module using IO ADT",
+  "main": "index.js",
+  "repository": "https://github.com/madoos/monadic-node/tree/master/packages/fs",
+  "homepage": "https://github.com/madoos/monadic-node",
+  "license": "MIT",
+  "author": {
+    "name": "Maurice",
+    "email": "maurice.ronet.dominguez@gmail.com",
+    "url": "https://github.com/madoos"
+  },
+  "keywords": [
+    "functional",
+    "fs",
+    "monad",
+    "functor",
+    "ap",
+    "applicative"
+  ],
+  "dependencies": {
+    "@monadic-node/core": "^0.0.1",
+    "ramda": "^0.27.0"
+  }
+}
