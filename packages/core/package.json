@@ -23,6 +23,7 @@
   "dependencies": {
     "crocks": "^0.12.4",
     "daggy": "^1.4.0",
+    "deep-equal": "^2.0.1",
     "fantasy-land": "^4.0.1",
     "ramda": "^0.27.0",
     "readable-stream": "^3.6.0"

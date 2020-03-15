@@ -54,6 +54,43 @@ packageNameIO.run(); // show in console "@monadic-node/core"
 
 ```
 
+Transform all modules methods conditionally:
+
+```js
+const fs = require("fs");
+const { doWithCond, toIO, toAsync, toStream, callbackToStream } = require("@monadic-node/core");
+const { includes, T, equals, concat, nth, map, pipe, toString } = require("ramda");
+
+const fsMonadic = doWithCond(
+  [
+    [equals("watch"), callbackToStream],
+    [includes("Stream"), toStream],
+    [includes("Sync"), toIO],
+    [T, toAsync]
+  ],
+  fs
+);
+
+const { watch, readFile } = fsMonadic;
+const { join } = require("path");
+
+const WORKING_DIR = join(__dirname, "../");
+
+const getEditedFile = pipe(
+  watch,
+  map(nth(1)),
+  map(concat(WORKING_DIR)),
+  map(readFile),
+  map(map(toString))
+);
+
+getEditedFile(WORKING_DIR).consume(
+  file => file.fork(console.log, console.log),
+  console.log,
+  console.log
+);
+```
+
 ## API
 
 ### Stream
@@ -61,7 +98,6 @@ packageNameIO.run(); // show in console "@monadic-node/core"
 See Stream API doc core/Stream/README.md
 
 ### doWith
-
 
 Transform all methods of an object using the function provided. If any value of the object is not a function, no transformation is applied and the value is the same.
 
@@ -72,6 +108,16 @@ doWith :: Monad m => (
   ) -> { String: (* -> m a)}`
 ```
 
+### doWithCond
+
+Transform all the methods of an object using the array of paris provided. If any value of the object is not a function, no transformation is applied and the value is the same.
+
+```bash
+doWithCond :: Monad m => (
+    [[String -> Boolean, (* -> a -> * -> m a)]], 
+    {String: (* -> a)}
+  ) -> { String: (* -> m a)}`
+```
 ### toIO
 
 Convert the function provided into a function with the same arguments but returns an IO.
@@ -79,7 +125,6 @@ Convert the function provided into a function with the same arguments but return
 ```bash
 toIO :: (* -> a) -> (* -> IO a)
 ```
-
 ## isInstanceOfIO
 
 ```bash
@@ -90,9 +135,8 @@ isInstanceOfIO :: a -> Boolean
 Convert the callback function provided into a function with the same arguments but returns an Async.
 
 ```bash
-toAsync :: (* -> ()) -> (* -> IO a)
+toAsync :: (* -> ()) -> (* -> Async a)
 ```
-
 ```js
 const { readFile } = require('fs');
 const readFileAsync = toAsync(readFile)
@@ -123,6 +167,23 @@ read(file).consume(
   () => console.log('Completed!')
 )
 ```
+
+## callbackToStream
+
+Convert a node callback into a function with the same arguments but returns an Stream. The args pased to callback function are passed to array into stream.
+
+```js
+const { watch } = require('fs')
+
+const watchStream = callbackToStream(watch)
+
+watchStream('./')
+.consume(
+  console.log, 
+  console.error
+)
+```
+
 ## isInstanceOfStream
 
 ```bash

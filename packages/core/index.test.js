@@ -1,6 +1,7 @@
 const core = require("./");
 const { identity } = require("ramda");
 const { Readable } = require("stream");
+const { includes, T } = require("ramda");
 
 describe("Core module", () => {
   test(".as should transform all module methods to monadic methods", () => {
@@ -71,6 +72,41 @@ describe("Core module", () => {
         expect(n).toEqual(1);
         done();
       });
+    });
+  });
+
+  test(".doWithCond should lift methods in module using the conditions", () => {
+    const toUnaryArray = f => x => [f(x)];
+    const toVariadicArray = f => (...args) => [[f(...args)]];
+
+    const src = {
+      unary: n => n + 1,
+      variadic: (a, b, c) => a + b + c,
+      ClassExample: () => true,
+      prop: "value"
+    };
+
+    const result = core.doWithCond(
+      [
+        [includes("unary"), toUnaryArray],
+        [T, toVariadicArray]
+      ],
+      src
+    );
+
+    expect(result.unary(1)).toEqual([2]);
+    expect(result.variadic(1, 2, 3)).toEqual([[6]]);
+    expect(result.ClassExample).toEqual(src.ClassExample);
+    expect(result.prop).toEqual("value");
+  });
+
+  test(".callbackToStream", done => {
+    const identityCallBack = (x, cb) => cb(x);
+    const identityStream = core.callbackToStream(identityCallBack);
+
+    identityStream(1).consume(x => {
+      expect(x).toEqual([1]);
+      done();
     });
   });
 });
