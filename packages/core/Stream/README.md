@@ -23,6 +23,7 @@ const Stream = require('@monadic-node/core/Stream')
 * Applicative
 * Monad
 * Filterable
+* Foldable (not strict)
 
 ## Example
 

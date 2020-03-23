@@ -132,7 +132,7 @@ Stream.prototype.filter = function(predicate) {
 
 Stream.prototype[FL.filter] = Stream.prototype.filter;
 
-// foldable
+// foldable (not strict)
 Stream.prototype.reduce = function(f, initial) {
   return Stream(() => this.getNodeStream().pipe(esReduce(f, initial)));
 };
