@@ -22,6 +22,7 @@ const Stream = require('@monadic-node/core/Stream')
 * Functor
 * Applicative
 * Monad
+* Filterable
 
 ## Example
 

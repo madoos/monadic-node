@@ -3,6 +3,8 @@ const FL = require("fantasy-land");
 const T = require("./transform");
 const { isFunction } = require("crocks");
 const { identity: id } = require("ramda");
+const es = require("event-stream");
+const esReduce = require("stream-reduce");
 
 const _TYPE = "@@/stream/type";
 
@@ -122,5 +124,19 @@ Stream.prototype.consume = function(next = id, error = id, complete = id) {
 
   return stream;
 };
+
+// filterable
+Stream.prototype.filter = function(predicate) {
+  return Stream(() => this.getNodeStream().pipe(es.filterSync(predicate)));
+};
+
+Stream.prototype[FL.filter] = Stream.prototype.filter;
+
+// foldable
+Stream.prototype.reduce = function(f, initial) {
+  return Stream(() => this.getNodeStream().pipe(esReduce(f, initial)));
+};
+
+Stream.prototype[FL.reduce] = Stream.prototype.reduce;
 
 module.exports = Stream;
